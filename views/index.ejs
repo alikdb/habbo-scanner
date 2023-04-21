@@ -1,0 +1,39 @@
+<%- include('layouts/header') %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form action="/habbo" method="post">
+        <div class="row justify-content-center mt-5">
+          <div class="col-6">
+            <div class="row">
+              <div class="col-12">
+                <h1>Find your habbo's</h1>
+              </div>
+              <div class="col-7">
+                <div class="form-group">
+                  <label for="habbo">Habbo</label>
+                  <input type="text" class="form-control" name="habbo" id="habbo" autocomplete="off" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="hotel">Hotel</label>
+                  <select name="hotel" class="form-control" id="hotel">
+                    <% hotels.forEach(hotel => { %>
+                    <option value="<%-hotel%>"><%-hotel%></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="find"></label>
+                <button type="submit" class="d-block btn btn-success">Find</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('layouts/footer') %>

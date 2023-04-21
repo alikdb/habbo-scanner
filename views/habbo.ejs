@@ -1,0 +1,145 @@
+<%- include('layouts/header') %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-3">
+          <img
+            src="https://www.habbo.com.tr/habbo-imaging/avatarimage?&user=<%= userData.user.name %>&action=std,crr=44&direction=2&head_direction=2&img_format=png&gesture=srp&frame=1&headonly=0&size=l"
+            alt="<%= userData.user.name %>"
+            style="image-rendering: pixelated"
+          />
+        </div>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-12 m-2">
+              <a href="/">
+                <button class="btn btn-info">Return to search</button>
+              </a>
+            </div>
+            <div class="col-12">
+              <ul>
+                <li>Habbo Adı: <b><%= userData.user.name %></b></li>
+                <li>Motto: <b><%= userData.user.motto %></b></li>
+                <li>
+                  Aktiflik:
+                  <b> <%= (userData.user.online === true ? 'Çevrimiçi' : 'Çevrimdışı') %> </b>
+                </li>
+                <li>
+                  Kayıt Tarihi:
+                  <b> <%= moment(userData.user.memberSince) .format('DD.MM.YYYY HH:mm:ss') %> </b>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12">
+              <% userData.user.selectedBadges.forEach(badge => { %>
+              <img
+                style="image-rendering: pixelated"
+                class="badges"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-title="<%= badge.code %>"
+                data-bs-html="true"
+                data-bs-content="<%= badge.name %> <br /> <small> <%= badge.description %></small>"
+                src="https://images.habbo.com/c_images/album1584/<%= badge.code %>.gif"
+              />
+              <% }) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="row">
+            <div class="card mt-5">
+              <div class="card-body">
+                <div class="col-12">
+                  <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#badges"
+                          aria-expanded="false"
+                          aria-controls="flush-collapseOne"
+                        >
+                          Badges (<%- userData.badges.length %>)
+                        </button>
+                      </h2>
+                      <div id="badges" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                          <% userData.badges.forEach(badge => { %>
+                          <div style="height: 60px; width: 60px; display: inline-block">
+                            <div
+                              style="
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                              "
+                            >
+                              <img
+                                style="image-rendering: pixelated; max-width: 50px; max-height: 50px"
+                                class="badges"
+                                data-bs-toggle="popover"
+                                data-bs-placement="top"
+                                data-bs-title="<%= badge.code %>"
+                                data-bs-html="true"
+                                data-bs-content="<%= badge.name %> <br /> <small> <%= badge.description %></small>"
+                                src="https://images.habbo.com/c_images/album1584/<%= badge.code %>.gif"
+                              />
+                            </div>
+                          </div>
+                          <% }) %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#rooms"
+                          aria-expanded="false"
+                          aria-controls="rooms"
+                        >
+                          Rooms (<%- userData.rooms.length %>)
+                        </button>
+                      </h2>
+                      <div id="rooms" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                          <div class="row">
+                            <% userData.rooms.forEach(room => { %>
+
+                            <div class="col-md-4 mb-2">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-4">
+                                      <img src="<%= room.thumbnailUrl %>" alt="" />
+                                    </div>
+                                    <div class="col-7"><%- room.name %></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <% }) %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('layouts/footer') %>
